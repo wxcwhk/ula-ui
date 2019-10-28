@@ -6,13 +6,19 @@
         <p class="not-found-desc">这是用户管理页面 ...</p>
         <el-button @click="$router.go(-1)">返回上一页</el-button>
         <el-button type="primary" class="not-found-btn-gohome" @click="$router.push('/')">进入首页</el-button>
+        <a href="javascript:" @click="$store.dispatch('switch_dialog')">点击</a>
+        <t-dialog></t-dialog>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import dialog from '../components/dialog.vue'
   export default {
+    components:{
+      "t-dialog":dialog
+    }
   }
 </script>
 

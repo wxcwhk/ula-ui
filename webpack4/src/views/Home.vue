@@ -9,7 +9,7 @@
                   <i class="el-icon-menu"></i>
               </div>
           </el-col>
-          <el-col :span="13">
+          <el-col :span="10">
               <div class="hearNavBar">
                   <el-menu :default-active="activeIndex" class="el-menu-demo" background-color="#4b5f6e" text-color="#fff"
                         active-text-color="ffd04b" mode="horizontal" @select="handleSelectHearNavBar">
@@ -19,7 +19,16 @@
                   </el-menu>
               </div>
           </el-col>
-          <el-col :span="5" class="userinfo">
+          <el-col :span="6" class="userinfo">
+              <el-dropdown @command="handleCommand">
+                <span class="el-dropdown-link lang-inner">
+                  中文<i class="el-icon-arrow-down el-icon--right"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item command="zh">中文</el-dropdown-item>
+                  <el-dropdown-item command="en">English</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
               <el-dropdown trigger="hover">
                   <span class="el-dropdown-link userinfo-inner"><img :src="this.userAvatar" /></span>
                   <el-dropdown-menu slot="dropdown">
@@ -38,8 +47,11 @@
                           <i class="el-icon-location"></i>
                           <span slot="title">系统管理</span>
                       </template>
-                      <el-menu-item index="1-1" @click="$router.push('user')">用户管理</el-menu-item>
-                      <el-menu-item index="1-2" @click="$router.push('menu')">菜单管理</el-menu-item>
+                      <el-menu-item index="1-1" @click="$router.push('user')">{{$t("sys.userMng")}}</el-menu-item>
+                      <el-menu-item index="1-2" @click="$router.push('dept')">{{$t("sys.deptMng")}}</el-menu-item>
+                      <el-menu-item index="1-3" @click="$router.push('role')">{{$t("sys.roleMng")}}</el-menu-item>
+                      <el-menu-item index="1-4" @click="$router.push('menu')">{{$t("sys.menuMng")}}</el-menu-item>
+                      <el-menu-item index="1-5" @click="$router.push('log')">{{$t("sys.logMng")}}</el-menu-item>
                   </el-submenu>
                    <el-submenu index="2">
                       <template slot="title">
@@ -111,6 +123,11 @@ export default {
     collapse: function() {
       this.isCollapse = !this.isCollapse;
     },
+    handleCommand(command){
+      let lang = command ==''?'zh':command
+      this.$i18n.local = lang
+      
+    },
     //退出登录
     logout: function() {
       var _this = this;
@@ -152,9 +169,15 @@ export default {
       text-align: right;
       padding-right: 30px;
       float: right;
+      .lang-inner {
+        font-size: 15px;
+        cursor: pointer;
+        color: #fff;
+      }
       .userinfo-inner {
         font-size: 20px;
         cursor: pointer;
+        padding-left: 15px;
         color: #fff;
         img {
           width: 40px;

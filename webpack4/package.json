@@ -15,6 +15,7 @@
     "autoprefixer": "^9.6.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^3.0.0",
@@ -42,6 +43,7 @@
     "js-cookie": "^2.2.1",
     "qs": "^6.9.0",
     "vue": "^2.6.10",
+    "vue-i18n": "^8.15.0",
     "vuex": "^3.1.1"
   }
 }
