@@ -10,8 +10,6 @@ import store from './store'
 Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
 Vue.use(api)
 
-
-
 Vue.config.productionTip = false
 new Vue({
     el:'#app',

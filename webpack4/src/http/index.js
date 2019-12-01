@@ -1,6 +1,6 @@
 //将 axios 封装成插件，按插件方式引入
 
-import apis from './interface'
+import apis from './api'
 
 const install = Vue =>{
     if(install.installed)

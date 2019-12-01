@@ -1,9 +1,15 @@
 import Vue from 'vue/dist/vue.js'
 import vuex from 'vuex'
-import dialog_store from '../components/dialog_store.js'
+
 Vue.use(vuex)
-export default  new vuex.Store({
+
+import AppStore from './modules/AppStore.js';
+import MenuStore from './modules/MenuStore.js';
+
+const store = new vuex.Store({
     modules:{
-        dialog:dialog_store
+        app:AppStore,
+        menu:MenuStore
     }
 })
+export default store

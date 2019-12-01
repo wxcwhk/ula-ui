@@ -2,6 +2,7 @@ import Mock from 'mockjs';
 import * as login from './modules/login'
 import * as user from './modules/user'
 import * as menu from './modules/menu'
+import { baseUrl } from '@/utils/global'
 
 // 1. 开启/关闭[业务模块]拦截, 通过调用fnCreate方法[isOpen参数]设置.
 // 2. 开启/关闭[业务模块中某个请求]拦截, 通过函数返回对象中的[isOpen属性]设置.
@@ -19,7 +20,12 @@ function fnCreate(mod,isOpen=true){
         for(var key in mod){
             ((res) =>{
                 if(res.isOpen !== false){
-                    Mock.mock(new RegExp(res.url),res.type,(opts) =>{
+                    let url = baseUrl
+                    if(!url.endsWith("/")) {
+                        url = url + "/"
+                    }
+                    url = url + res.url
+                    Mock.mock(new RegExp(url),res.type,(opts) =>{
                         opts['data'] = opts.body?JSON.parse(opts.body):null
                         delete opts.body
                         console.log('\n')

@@ -41,10 +41,11 @@ export default {
   methods:{
       login(){
           let userInfo = {account:this.loginForm.account, password:this.loginForm.password}
-          this.$api.login(JSON.stringify(userInfo)).then((res) =>{
+          this.$api.login.login(JSON.stringify(userInfo)).then((res) =>{
               alert(res.data.token)
               Cookies.set('token',res.data.token)  //放置token到Cookie
               sessionStorage.setItem('user',userInfo.account)//保存用户到本地会话
+              this.$store.commit('menuRouteLoaded',false)
               this.$router.push('/')
           }).catch(function(res){
               alert(res);
