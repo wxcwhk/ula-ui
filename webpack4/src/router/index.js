@@ -4,11 +4,6 @@ import Login from '@/views/Login'
 import Home from '@/views/Home'
 import NotFound from '@/views/Error/404'
 import Main from '@/views/Main/Main';
-import User from '@/views/SysMng/User'
-import Dept from '@/views/SysMng/Dept'
-import Role from '@/views/SysMng/Role'
-import Menu from '@/views/SysMng/Menu'
-import Log from '@/views/SysMng/Log'
 import store from '@/store'
 import api from '@/http/api'
 import { isURL } from '@/utils/validate'
@@ -21,12 +16,7 @@ const router = new Router({
         name:'首页',
         component:Home,
         children:[
-            {path:'/main',name:'系统介绍',component:Main},
-            {path:'/user',name:'用户管理',component:User},
-            {path:'/menu',name:'菜单管理',component:Menu},
-            {path:'/dept',name:'部门管理',component:Dept},
-            {path:'/role',name:'角色管理',component:Role},
-            {path:'/log',name:'日志管理',component:Log},
+            {path:'/main',name:'系统介绍',component:Main}
             
         ]
     },{
@@ -68,12 +58,18 @@ router.beforeEach((to,form,next) =>{
  * 加载动态菜单和路由
  */
 function addDynamicMenuAndRoutes(userName,to,from){
+    if(store.state.app.menuRouterLoaded){
+        console.log("动态菜单和路由已经存在")
+        return
+    }
     api.menu.findMenuTree().then( (res) => {
-        store.commit('setMenuTree', res.data)
+      
         // 添加动态路由
         let dynamicRoutes = addDynamicRoutes(res.data)
         router.options.routes[0].children = router.options.routes[0].children.concat(dynamicRoutes)
         router.addRoutes(router.options.routes);
+        store.commit('setMenuTree', res.data)
+        store.commit('menuRouteLoaded',true)
     }).catch(function(res) {
         alert(res);
     });

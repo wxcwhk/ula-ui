@@ -6,7 +6,7 @@ import axios from '../axios'
 
 export const findMenuTree = () => {
     return axios({
-        url: '/menu/findMenuTree',
+        url: '/menu/findNavTree',
         method: 'get'
     })
 }

@@ -45,7 +45,7 @@ export default {
               alert(res.data.token)
               Cookies.set('token',res.data.token)  //放置token到Cookie
               sessionStorage.setItem('user',userInfo.account)//保存用户到本地会话
-              this.$store.commit('menuRouteLoaded',false)
+              this.$store.commit('menuRouteLoaded',false)  //要求重新加载导航菜单
               this.$router.push('/')
           }).catch(function(res){
               alert(res);
