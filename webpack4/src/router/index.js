@@ -47,8 +47,8 @@ router.beforeEach((to,form,next) =>{
             next({path:'/login'})
         }else{
             //加载动态菜单和路由
-            // addDynamicMenuAndRoutes(isLogin,to,form)
-            next()
+             addDynamicMenuAndRoutes()
+             next()
         }
     }
 })
@@ -57,22 +57,25 @@ router.beforeEach((to,form,next) =>{
  * 
  * 加载动态菜单和路由
  */
-function addDynamicMenuAndRoutes(userName,to,from){
-    if(store.state.app.menuRouterLoaded){
-        console.log("动态菜单和路由已经存在")
+function addDynamicMenuAndRoutes(){
+    if(store.state.app.menuRouteLoaded){
+        console.log('动态菜单和路由已经存在')
         return
     }
-    api.menu.findMenuTree().then( (res) => {
-      
-        // 添加动态路由
-        let dynamicRoutes = addDynamicRoutes(res.data)
-        router.options.routes[0].children = router.options.routes[0].children.concat(dynamicRoutes)
-        router.addRoutes(router.options.routes);
-        store.commit('setMenuTree', res.data)
-        store.commit('menuRouteLoaded',true)
-    }).catch(function(res) {
-        alert(res);
-    });
+    api.menu.findNavTree().then( (res) => {
+    store.commit('setMenuTree', res.data)
+    // 添加动态路由
+    let dynamicRoutes = addDynamicRoutes(res.data)
+    router.options.routes[0].children = router.options.routes[0].children.concat(dynamicRoutes)
+    router.addRoutes(router.options.routes);
+    //保存加载状态
+    store.commit('menuRouteLoaded',true)
+    //保存菜单淑
+    store.commit('setMenuTree',res.data)
+  })
+  .catch(function(res) {
+    alert(res);
+  });
 }
 /***
  * 添加动态路由
