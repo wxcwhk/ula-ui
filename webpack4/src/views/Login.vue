@@ -17,7 +17,7 @@
 <script>
 
 import Cookies from "js-cookie";
-
+import mock from "@/mock/index";
 export default {
   name: 'Login',
   data(){

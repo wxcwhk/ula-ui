@@ -18,13 +18,9 @@ const loginData = {
 export function login () {
     return {
       // isOpen: false,
-      url: 'http://localhost:8080/login',
+      url: 'login',
       type: 'post',
-      data: {
-        'msg': 'success',
-        'code': 0,
-        'data': loginData
-      }
+      data: loginData
     }
   }
 
@@ -38,12 +34,8 @@ const logoutData = {
 }
 export function logout(){
   return {
-    url:"http://localhost:8080/logout",
+    url:"logout",
     type:'get',
-    data:{
-      'msg':'success',
-      'code':0,
-      'data':logoutData
-    }
+    data:logoutData
   }
 }
