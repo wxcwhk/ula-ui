@@ -47,7 +47,7 @@ router.beforeEach((to,form,next) =>{
             next({path:'/login'})
         }else{
             //加载动态菜单和路由
-            addDynamicMenuAndRoutes(isLogin,to,form)
+            // addDynamicMenuAndRoutes(isLogin,to,form)
             next()
         }
     }

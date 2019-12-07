@@ -8,6 +8,8 @@ import i18n from './i18n'
 import store from './store'
 import global from '@/utils/global'
 
+
+
 Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
 Vue.use(api)
 
